@@ -1,10 +1,11 @@
-from fastapi import FastAPI, Request
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 
-from app.conf import DEBUG, LIB_PATH
+from app.conf import DEBUG
 
 
 app = FastAPI(debug=DEBUG)
+
 
 BODY = """
 <html>
@@ -12,17 +13,14 @@ BODY = """
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
-<py-env>
-</py-env>
 <body>
-    <py-script>
-        print("Hello, world!")
-    </py-script>
+    <p>REPL example</p>
+    <py-repl></py-repl>
 </body>
 </html>
 """
 
 
 @app.get("/", response_class=HTMLResponse)
-def home(request: Request):
+def repl():
     return BODY
